@@ -15,7 +15,7 @@ getAllThought(req, res) {
 
 //get single thought by id
 getThoughtById({ params }, res) {
-    Thought.findOne({ _id: params.id })
+    Thought.findOne({ _id: params.thoughtId })
       .populate({
         path: 'reactions',
         select: '-__v'
@@ -40,8 +40,9 @@ createThought({ params, body }, res) {
     console.log(body);
     Thought.create(body)
       .then(({ _id }) => {
+        console.log (body)
         return User.findOneAndUpdate(
-          { _id: params.userId },
+          { _id: body.username },
           { $push: { thoughts: _id } },
           { new: true }
         );
@@ -61,7 +62,7 @@ createThought({ params, body }, res) {
 updateThoughtById({ params, body }, res) {
     Thought.findOneAndUpdate(
       { _id: params.thoughtId },
-      { $push: { reactions: body } },
+      { $set: body },
       { new: true, runValidators: true }
     )
       .then(dbThoughtData => {
@@ -80,10 +81,10 @@ deleteThoughtById({ params }, res) {
         { _id: params.thoughtId })
       .then(deletedThought => {
         if (!deletedThought) {
-          return res.status(404).json({ message: 'No thoughts with this id!' });
+          return res.status(404).json({ message: 'Your thought has been deleted!' });
         }
         return User.findOneAndUpdate(
-            { _id: params.pizzaId },
+            { thoughts: params.thoughtId },
             { $pull: { thoughts: params.thoughtId } },
             { new: true }
           );
