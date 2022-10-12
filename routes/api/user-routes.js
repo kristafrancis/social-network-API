@@ -16,11 +16,7 @@ router
   .post(createUser);
 
 // /api/users/:id
-router
-  .route('/:id')
-  .get(getUserById)
-  .put(updateUserById)
-  .delete(deleteUserById);
+router.route('/:id').get(getUserById).put(updateUserById).delete(deleteUserById);
 
 // /api/user/:id/friends/:friendsId
 //router
