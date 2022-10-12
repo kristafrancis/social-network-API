@@ -97,14 +97,42 @@ deleteThoughtById({ params }, res) {
           res.json(dbUserData);
         })
         .catch(err => res.json(err));
-    }
+    },
   
-
-
 //create reaction stored in a single thoughts array field
+createReaction(req, res) {
+  Thought.findOneAndUpdate(
+    {_id: req.params.thoughtId},
+    {$push: {reactions: req.body}},
+    {new: true, runValidators: true}
+  )
+  .then(dbReactionData => {
+    if(!dbReactionData){
+      res.status(404).json({ message: 'No reaction found'});
+      return;
+    }
+    res.json(dbReactionData);
+  })
+  .catch(err => res.json(err));
+},
 
 
 //delete reaction by reactions Id
+deleteReaction(req, res) {
+  Thought.findOneAndUpdate(
+    {_id: req.params.thoughtId},
+    {$pull: {reactions: {reactionId: req.params.reactionId}}},
+    {new: true}
+  )
+  .then(dbReactionData => {
+    if(!dbReactionData){
+      res.status(404).json({ message: 'No reaction found'});
+      return;
+    }
+    res.json(dbReactionData);
+  })
+  .catch(err => res.json(err));
+}
 };
 
 module.exports = thoughtController;
