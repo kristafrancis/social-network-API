@@ -35,7 +35,7 @@ Krista Francis
 
 ## Screenshot
 
-social-network-api-screenshot.jpg
+![](images/social-network-api-screenshot.jpg)
 
 
 
