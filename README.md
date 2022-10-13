@@ -32,6 +32,7 @@ Krista Francis
 
 ## Project Walkthrough Video Link
 
+https://drive.google.com/file/d/1-lwwds2Tkt2bZT5VYo7G2xw0vRBt4Twb/view
 
 ## Screenshot
 
