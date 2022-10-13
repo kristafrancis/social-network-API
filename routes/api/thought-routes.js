@@ -4,9 +4,9 @@ const {
   getThoughtById,  
   createThought,
   updateThoughtById,
-  deleteThoughtById
-  // createReaction,
-  // deleteReaction
+  deleteThoughtById,
+  createReaction,
+  deleteReaction
 } = require('../../controllers/thought-controller');
 
 // /api/thoughts
